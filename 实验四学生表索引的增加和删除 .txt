@@ -1,0 +1,39 @@
+use db_sc_zcc066；
+Database changed
+mysql> create table tb_students
+    -> (sno char(11) not null unique,
+    -> sname varchar(20) not null,
+    -> ssex char(2),
+    -> sage smallint,
+    -> sdept varchar(30),
+    -> index(sname desc)
+    -> )engine=innodb;
+
+create table tb_sc1
+     (sno char(11) not null,
+     cno char(4) not null,
+     grade float,
+     constraint idx_sc unique index(sno asc,cno desc) //升序是asc，降序是desc
+      )engine=innodb;
+
+ create unique index idx_stusno
+     on tb_students(sno);
+
+create unique index idx_coucno
+     on tb_course(cno desc);//索引建立在tb_course的（cno）列上，是降序
+
+create unique index idx_sc
+     on tb_sc(sno,cno desc);//组合索引，sno升序，cno降序
+
+show index|indexes|keys from tb_sc;//查看索引
+
+//创建索引
+create index idx_NON_Stusage on tb_student(Sage desc);
+create unique index idx_UN_Stusage on tb_student(Sage desc);
+ create unique index idx_UN_Ccredit on tb_course1(ccredit);
+create unique index idx_UN_SC on tb_sc(sno,cno desc);
+//删除索引
+drop index idx_NON_Stusage on tb_student;
+drop index idx_UN_Stusage on tb_student;
+drop index idx_UN_Ccredit on tb_course1;
+drop index idx_UN_SC on tb_sc;
